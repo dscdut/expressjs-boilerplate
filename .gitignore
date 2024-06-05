@@ -1,0 +1,10 @@
+.idea/
+.vscode
+/node_modules
+/build
+src/public/css/
+.env
+package-lock.json
+
+auth.service.js
+jwt.service.js
