@@ -1,0 +1,99 @@
+components:
+  schemas:
+    User:
+      type: object
+      properties:
+        id:
+          type: number
+        email:
+          type: string
+          format: email
+        full_name:
+          type: string
+      example:
+        id: 1
+        email: user01@gmail.com
+        full_name: user01
+
+    Role:
+      type: object
+      properties:
+        id:
+          type: number
+        name:
+          type: string
+        createdAt:
+          type: date
+        updatedAt:
+          type: date
+      example:
+        id: 1
+        name: admin
+        createdAt: 2024-06-05T17:00:43.290Z
+        updatedAt: 2024-06-05T17:00:43.290Z
+
+    AccessToken:
+      type: object
+      properties:
+        access_token:
+          type: string
+      example:
+        access_token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MTc2MTIyNzIsImlkIjo0LCJmdWxsX25hbWUiOiJ1c2VyIDA0IiwiZW1haWwiOiJ1c2VyMDRAZ21haWwuY29tIiwicm9sZSI6MiwiaWF0IjoxNzE3NjEwNDcyfQ.alolIw1QEwkWvxYpryF8Tvj0V4rtTpv3USQlDy466vQ
+
+    RefreshToken:
+      type: object
+      properties:
+        referesh_token:
+          type: string
+      example:
+        referesh_token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MTc2MTIyNzIsImlkIjo0LCJmdWxsX25hbWUiOiJ1c2VyIDA0IiwiZW1haWwiOiJ1c2VyMDRAZ21haWwuY29tIiwicm9sZSI6MiwiaWF0IjoxNzE3NjEwNDcyfQ.alolIw1QEwkWvxYpryF8Tvj0V4rtTpv3USQlDy466vQ
+
+    Error:
+      type: object
+      properties:
+        error_code:
+          type: number
+        message:
+          type: string
+
+    Success:
+      type: object
+      properties:
+        success:
+          type: boolean
+
+  examples:
+    error_101_example:
+      value:
+        error_code: 101
+        message: The email and password field is required
+    error_102_example:
+      value:
+        error_code: 102
+        message: Incorrect email or password
+    error_103_example:
+      value:
+        error_code: 103
+        message: An unexpected error occurred on the server
+    error_104_example:
+      value:
+        error_code: 104
+        message: Invalid syntax
+    error_108_example:
+      value:
+        error_code: 108
+        message: Email already exists
+    error_112_example:
+      value:
+        error_code: 112
+        message: The user ID does not exist.
+    error_113_example:
+      value:
+        error_code: 113
+        message: The user is not authorized to delete information
+
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
