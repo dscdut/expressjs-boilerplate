@@ -4,10 +4,10 @@ import asyncHandler from '@/utils/asyncHandler';
 import { authenticateToken } from '@/middlewares/authentication';
 import userController from '@/controller/user.controller';
 import validate from '@/middlewares/validate';
-import { deleteUser } from '@/validations/user.validation';
+import { updateUserByOwner } from '@/validations';
 
 const router = express.Router();
 
-router.delete('/:id', validate(deleteUser), authenticateToken, asyncHandler(userController.deleteUser));
+router.put('/', validate(updateUserByOwner), authenticateToken, asyncHandler(userController.updateUserByOwner));
 
 export default router;

@@ -3,6 +3,7 @@ import { ErrorResponse } from '@/response/error.response';
 import { statusCodes, errorCodes, errorMessages } from '@/response/httpResponse';
 import { UserRepository } from '../repository';
 import { ROLES } from '@/enum';
+import { RoleRepository } from '@/modules/role/repository';
 
 export class UserService {
   static getUserByEmail = async (email) => {
@@ -37,5 +38,30 @@ export class UserService {
       );
     }
     await UserRepository.delete(userId);
+  };
+
+  static updateUser = async (id, updateUserDto) => {
+    const user = await UserRepository.findOneBy('id', id);
+    if (!user)
+      throw new ErrorResponse(errorMessages.INVALID_SYNTAX, errorCodes.NOT_FOUND, errorCodes.INVALID_SYNTAX, [
+        errorMessages.INVALID_USER,
+      ]);
+
+    if (user.email !== updateUserDto.email) {
+      const isExistEmail = await UserRepository.isExist('email', updateUserDto.email);
+      if (isExistEmail) {
+        throw new ErrorResponse(errorMessages.DUPILICATE_EMAIL, statusCodes.CONFLICT, errorCodes.DUPILICATE_EMAIL);
+      }
+    }
+
+    const updatedUser = await UserRepository.update(id, updateUserDto);
+    if (!updatedUser)
+      throw new ErrorResponse(
+        errorMessages.INTERNAL_SERVER_ERROR,
+        statusCodes.INTERNAL_SERVER_ERROR,
+        errorCodes.INTERNAL_SERVER_ERROR,
+      );
+
+    return pick(await UserRepository.findOneBy('id', id), ['id', 'full_name', 'email', 'role']);
   };
 }

@@ -8,7 +8,7 @@ module.exports = (sequelize, DataTypes) => {
   class User extends Model {
     static associate(models) {
       // define association here
-      User.belongsTo(models.Role, { foreignKey: 'role_id', as: 'roleData' });
+      User.belongsTo(models.Role, { foreignKey: 'role_id', as: 'role' });
     }
 
     async hashPassword() {
