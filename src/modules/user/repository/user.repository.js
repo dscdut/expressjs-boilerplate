@@ -30,4 +30,10 @@ export class UserRepository {
   static matchPassword = async (password, instance) => {
     return await db.User.matchPassword(password, instance);
   };
+
+  static delete = async (id) => {
+    await db.User.destroy({
+      where: { id: id },
+    });
+  };
 }

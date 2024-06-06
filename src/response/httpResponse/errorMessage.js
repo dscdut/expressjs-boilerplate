@@ -1,6 +1,9 @@
 export default {
   LOGIN_FAILED: 'Incorrect email or password',
-  INTERNAL_SERVER_ERROR: 'An unexpected error occurred on the server',
+  INTERNAL_SERVER_ERROR: 'The database connection has an issue',
+  LOGIC_SYNTAX_ERROR: 'There are issues with the logic and syntax',
+  INSUFFICIENT_RESOURCES_ERROR: `The server doesn’t have sufficient resources to handle user requests`,
+  NETWORK_CONNECTION_ERROR: 'Please check your network connection and try again later',
   INVALID_SYNTAX: 'Invalid syntax',
   DUPLICATE_EMAIL: 'Email already exists',
   INVALID_USER: 'User ID does not exist',
@@ -11,4 +14,6 @@ export default {
   INVALID_ROLE: 'Role with the provided ID does not exist',
   INVALID_USER: 'User ID does not exist',
   ROUTE_NOT_FOUND: 'The path does not exist',
+  REQUIRED_TOKEN: 'Users must log in to access this resource',
+  INVALID_TOKEN: 'Token has expired or is not in the correct format',
 };

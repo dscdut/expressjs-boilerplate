@@ -1,5 +1,5 @@
 'use strict';
-import { OK, CREATED } from 'http-status';
+import { OK, CREATED, NO_CONTENT } from 'http-status';
 
 class SuccessResponse {
   constructor({ statusCode = OK, data = {} }) {
@@ -24,4 +24,10 @@ class CreatedResponse extends SuccessResponse {
   }
 }
 
-export { OkResponse, CreatedResponse, SuccessResponse };
+class NoContent extends SuccessResponse {
+  constructor({ statusCode = NO_CONTENT, data = {} } = {}) {
+    super({ statusCode, data });
+  }
+}
+
+export { OkResponse, CreatedResponse, SuccessResponse, NoContent };
