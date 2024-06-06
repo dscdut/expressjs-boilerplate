@@ -12,7 +12,6 @@ export default {
   UNAUTHORIZED_EDIT_OTHER_ADMIN: 'The admin is not authorized to edit information of the other admins',
   RESOURCE_NOT_EXIST: 'The resource does not exist',
   INVALID_ROLE: 'Role with the provided ID does not exist',
-  INVALID_USER: 'User ID does not exist',
   ROUTE_NOT_FOUND: 'The path does not exist',
   REQUIRED_TOKEN: 'Users must log in to access this resource',
   INVALID_TOKEN: 'Token has expired or is not in the correct format',

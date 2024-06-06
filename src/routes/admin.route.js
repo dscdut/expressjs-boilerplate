@@ -2,11 +2,11 @@
 import express from 'express';
 import asyncHandler from '@/utils/asyncHandler';
 import userController from '@/controller/user.controller';
-import validate from '@/middlewares/validate';
 import { id } from '@/validations';
+import validateRequest from '@/middlewares/validate';
 
 const router = express.Router();
 
-router.delete('/users/:id', validate(id), asyncHandler(userController.deleteUser));
+router.delete('/users/:id', validateRequest(id), asyncHandler(userController.deleteUser));
 
 export default router;
