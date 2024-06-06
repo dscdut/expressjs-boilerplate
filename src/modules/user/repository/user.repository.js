@@ -36,4 +36,10 @@ export class UserRepository {
       where: { id: id },
     });
   };
+
+  static delete = async (id) => {
+    await db.User.destroy({
+      where: { id: id },
+    });
+  };
 }
