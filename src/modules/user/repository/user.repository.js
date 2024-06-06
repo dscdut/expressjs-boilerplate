@@ -48,4 +48,10 @@ export class UserRepository {
     }
     return null;
   };
+
+  static delete = async (id) => {
+    await db.User.destroy({
+      where: { id: id },
+    });
+  };
 }
