@@ -43,4 +43,10 @@ export class UserRepository {
     const isMatchPassword = await db.User.matchPassword(password, instance);
     return isMatchPassword;
   };
+
+  static delete = async (id) => {
+    await db.User.destroy({
+      where: { id: id },
+    });
+  };
 }

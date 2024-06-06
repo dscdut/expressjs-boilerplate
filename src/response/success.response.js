@@ -25,4 +25,10 @@ class CREATED extends SuccessResponse {
   }
 }
 
-export { OK, CREATED, SuccessResponse };
+class NoContent extends SuccessResponse {
+  constructor({ statusCode = statusCodes.NO_CONTENT, data = {} }) {
+    super({ statusCode, data });
+  }
+}
+
+export { OK, CREATED, SuccessResponse, NoContent };

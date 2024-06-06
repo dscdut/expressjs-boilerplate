@@ -2,6 +2,7 @@ import pick from '@/utils/pick';
 import { ErrorResponse } from '@/response/error.response';
 import { statusCodes, errorCodes, errorMessages } from '@/response/httpResponse';
 import { UserRepository } from '../repository';
+import { ROLES } from '@/enum';
 
 export class UserService {
   static getUserByEmail = async (email) => {
@@ -18,5 +19,23 @@ export class UserService {
     const createdUser = await UserRepository.create(userDto);
 
     return pick(createdUser, ['id', 'full_name', 'email']);
+  };
+
+  static deleteUser = async (userId) => {
+    const user = await UserRepository.findOneBy('id', userId);
+
+    if (!user) {
+      throw new ErrorResponse(errorMessages.RESOURCE_NOT_EXIST, statusCodes.NOT_FOUND, errorCodes.RESOURCE_NOT_EXIST, [
+        errorMessages.INVALID_USER,
+      ]);
+    }
+    if (user.role_id === ROLES.IS_ADMIN.id) {
+      throw new ErrorResponse(
+        errorMessages.UNAUTHORIZED_DELETE_OTHER_ADMIN,
+        statusCodes.FORBIDDEN,
+        errorCodes.UNAUTHORIZED_DELETE_OTHER_ADMIN,
+      );
+    }
+    await UserRepository.delete(userId);
   };
 }

@@ -3,6 +3,7 @@ import express from 'express';
 import routes from '@/routes';
 import appConfig from '@/config/app.config';
 import { errorMessages, errorCodes, statusCodes } from '@/response/httpResponse';
+import { ErrorResponse } from '@/response/error.response';
 
 const {
   app: { prefix },
@@ -13,11 +14,13 @@ router.use(prefix, routes);
 
 // handler error
 router.use((req, res, next) => {
-  const error = new Error('Not Found');
-  error.status = statusCodes.NOT_FOUND;
-  error.err_code = errorCodes.RESOURCE_NOT_EXIST;
-  error.message = errorMessages.RESOURCE_NOT_EXIST;
-  error.details = [errorMessages.ROUTE_NOT_FOUND];
+  const details = [errorMessages.ROUTE_NOT_FOUND];
+  const error = new ErrorResponse(
+    errorMessages.RESOURCE_NOT_EXIST,
+    statusCodes.NOT_FOUND,
+    errorCodes.RESOURCE_NOT_EXIST,
+    details,
+  );
   next(error);
 });
 
