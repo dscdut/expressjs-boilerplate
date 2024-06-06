@@ -54,4 +54,16 @@ export class UserRepository {
       where: { id: id },
     });
   };
+
+  static update = async (id, userDto) => {
+    const result = await db.User.update(userDto, {
+      where: { id: id },
+      returning: true,
+    });
+
+    if (result[0] === 1) {
+      return result[1][0];
+    }
+    return null;
+  };
 }
