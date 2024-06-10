@@ -7,4 +7,5 @@ export default {
   DENY_DELETE: 'The user is not authorized to delete information',
   UNAUTHORIZED_EDIT_OTHER_ADMIN: 'The admin is not authorized to edit information of the other admins',
   INVALID_ROLE: 'Role with the provided ID does not exist',
+  ROUTE_NOT_FOUND: 'The path does not exist',
 };

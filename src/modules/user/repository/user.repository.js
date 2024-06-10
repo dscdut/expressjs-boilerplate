@@ -1,6 +1,16 @@
 import db from '@/database/models';
+import { ROLES } from '@/enum';
 
 export class UserRepository {
+  static isExist = async (column, value) => {
+    const exist = await db.User.count({
+      where: {
+        [column]: value,
+      },
+    });
+    return exist > 0;
+  };
+
   static findOneBy = async (column, value) => {
     const user = await db.User.findOne({
       where: { [column]: value },
@@ -24,7 +34,7 @@ export class UserRepository {
       full_name: userDto.full_name,
       email: userDto.email,
       password: userDto.password,
-      role: 2,
+      role_id: ROLES.IS_MEMBER.id,
     }).then((resultEntity) => resultEntity.get({ plain: true }));
     return createdUser;
   };
