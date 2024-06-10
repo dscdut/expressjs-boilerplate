@@ -15,8 +15,9 @@ router.use(prefix, routes);
 router.use((req, res, next) => {
   const error = new Error('Not Found');
   error.status = statusCodes.NOT_FOUND;
-  error.err_code = errorCodes.ROUTE_NOT_FOUND;
-  error.message = errorMessages.ROUTE_NOT_FOUND;
+  error.err_code = errorCodes.RESOURCE_NOT_EXIST;
+  error.message = errorMessages.RESOURCE_NOT_EXIST;
+  error.details = [errorMessages.ROUTE_NOT_FOUND];
   next(error);
 });
 

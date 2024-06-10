@@ -38,4 +38,9 @@ export class UserRepository {
     }).then((resultEntity) => resultEntity.get({ plain: true }));
     return createdUser;
   };
+
+  static matchPassword = async (password, instance) => {
+    const isMatchPassword = await db.User.matchPassword(password, instance);
+    return isMatchPassword;
+  };
 }
