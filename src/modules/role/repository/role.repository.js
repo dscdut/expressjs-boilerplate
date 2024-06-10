@@ -11,9 +11,4 @@ export class RoleRepository {
   static getRoles = async () => {
     return db.Role.findAll();
   };
-
-  static checkExistRole = async (roleId) => {
-    const roles = await this.getRoles();
-    return roles.some((role) => role.id === roleId);
-  };
 }

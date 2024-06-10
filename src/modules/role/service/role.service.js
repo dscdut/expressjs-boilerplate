@@ -1,9 +1,18 @@
+import { Optional } from '@/utils/optional';
 import { RoleRepository } from '../repository';
+import { errorCodes, errorMessages } from '@/response/httpResponse';
+import { BAD_REQUEST } from 'http-status';
+import { ErrorResponse } from '@/response/error.response';
 
 export class RoleService {
   static getRoleById = async (roleId) => {
-    const role = await RoleRepository.findOneBy('id', roleId);
-    return role;
+    return Optional.of(await RoleRepository.findOneBy('id', roleId))
+      .throwIfNotPresent(
+        new ErrorResponse(errorMessages.INVALID_SYNTAX, BAD_REQUEST, errorCodes.INVALID_SYNTAX, [
+          errorMessages.INVALID_ROLE,
+        ]),
+      )
+      .get();
   };
 
   static getRoleByName = async (name) => {

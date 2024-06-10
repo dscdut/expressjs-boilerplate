@@ -1,5 +1,6 @@
 import { ROLES } from '@/enum';
 import { JwtService } from '@/modules/auth/service';
+import { UserService } from '@/modules/user/service';
 import { ErrorResponse } from '@/response/error.response';
 import { errorCodes, errorMessages } from '@/response/httpResponse';
 import { NOT_FOUND, UNAUTHORIZED } from 'http-status';
@@ -15,8 +16,9 @@ export const authenticateToken = (req, res, next) => {
   next();
 };
 
-export const isAmdin = (req, res, next) => {
-  if (req.user && req.user.role_id === ROLES.ADMIN.id) {
+export const isAmdin = async (req, res, next) => {
+  const user = await UserService.findUserById(req.user.id);
+  if (user.role_id === ROLES.ADMIN.id) {
     next();
   } else {
     throw new ErrorResponse(errorMessages.RESOURCE_NOT_EXIST, NOT_FOUND, errorCodes.RESOURCE_NOT_EXIST, [

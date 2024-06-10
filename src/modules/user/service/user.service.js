@@ -5,11 +5,16 @@ import { UserRepository } from '../repository';
 import { CONFLICT, FORBIDDEN, NOT_FOUND } from 'http-status';
 import { ROLES } from '@/enum';
 import { Optional } from '@/utils/optional';
+import { RoleService } from '@/modules/role/service';
 
 export class UserService {
   static findUserByEmail = async (email) => {
     return Optional.of(await UserRepository.findOneBy('email', email))
-      .throwIfPresent(new ErrorResponse(errorMessages.DUPLICATE_EMAIL, CONFLICT, errorCodes.DUPLICATE_EMAIL))
+      .throwIfNotPresent(
+        new ErrorResponse(errorMessages.RESOURCE_NOT_EXIST, NOT_FOUND, errorCodes.RESOURCE_NOT_EXIST, [
+          errorMessages.INVALID_USER,
+        ]),
+      )
       .get();
   };
 
@@ -44,11 +49,25 @@ export class UserService {
     await UserRepository.delete(userId);
   };
 
-  static updateUser = async (id, updateUserDto) => {
+  static updateUser = async (id, updateUserDto, adminId = null) => {
     const user = await this.findUserById(id);
 
     if (user.email !== updateUserDto.email) {
-      await this.findUserByEmail(updateUserDto.email);
+      Optional.of(await UserRepository.findOneBy('email', updateUserDto.email)).throwIfPresent(
+        new ErrorResponse(errorMessages.DUPLICATE_EMAIL, CONFLICT, errorCodes.DUPLICATE_EMAIL),
+      );
+    }
+
+    if (adminId) {
+      await RoleService.getRoleById(updateUserDto.role_id);
+
+      if (user.role_id === ROLES.ADMIN.id && id !== adminId) {
+        throw new ErrorResponse(
+          errorMessages.UNAUTHORIZED_EDIT_OTHER_ADMIN,
+          FORBIDDEN,
+          errorCodes.UNAUTHORIZED_EDIT_OTHER_ADMIN,
+        );
+      }
     }
 
     await UserRepository.update(id, updateUserDto);
