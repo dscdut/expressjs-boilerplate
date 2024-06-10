@@ -26,4 +26,8 @@ export class UserRepository {
     );
     return createdUser;
   };
+
+  static matchPassword = async (password, instance) => {
+    return await db.User.matchPassword(password, instance);
+  };
 }
