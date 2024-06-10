@@ -4,6 +4,7 @@ const validationMessages = {
   PASSWORD: 'Password must be 7-50 characters long, contain at least one digit, and one uppercase letter',
   CONFIRM_PASSWORD: 'Confirm password must match the password',
   ID: 'The provided id is in an invalid format. The ID must be a number greater than 0',
+  SORT: `Sort must be a comma-separated list of field:order pairs, where order is either 'ASC' or 'DESC'`,
 };
 
 export default validationMessages;

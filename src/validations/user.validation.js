@@ -20,3 +20,12 @@ export const updateUserByAdmin = {
     role_id: JoiUtils.id(),
   }),
 };
+
+export const getUsersPagination = {
+  query: Joi.object().keys({
+    page_size: Joi.number().min(1),
+    page: Joi.number().min(1),
+    search: Joi.string().trim(),
+    sort: JoiUtils.sort(),
+  }),
+};

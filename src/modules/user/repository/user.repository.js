@@ -1,5 +1,6 @@
 import db from '@/database/models';
 import { ROLES } from '@/enum';
+import { Op } from 'sequelize';
 
 export class UserRepository {
   static findOneBy = async (column, value) => {
@@ -47,5 +48,32 @@ export class UserRepository {
       return result[1][0];
     }
     return null;
+  };
+
+  static getUsersPagination = async (page, page_size, search, sort) => {
+    const where = {};
+    if (search) {
+      where[Op.or] = [{ full_name: { [Op.iLike]: `%${search}%` } }, { email: { [Op.iLike]: `%${search}%` } }];
+    }
+
+    const users = await db.User.findAndCountAll({
+      where: where,
+      order: sort,
+      include: [
+        {
+          model: db.Role,
+          require: true,
+          as: 'role',
+          attributes: ['id', 'name'],
+        },
+      ],
+      attributes: ['id', 'full_name', 'email'],
+      offset: page_size * (page - 1),
+      limit: page_size,
+      raw: true,
+      nest: true,
+    });
+
+    return users;
   };
 }
