@@ -17,7 +17,6 @@ export class RoleService {
 
   static getRoleByName = async (name) => {
     const role = await RoleRepository.findOneBy('name', name);
-
     return role;
   };
 

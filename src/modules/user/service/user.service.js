@@ -70,6 +70,18 @@ export class UserService {
       }
     }
 
+    if (adminId) {
+      await RoleService.getRoleById(updateUserDto.role_id);
+
+      if (user.role_id === ROLES.ADMIN.id && id !== adminId) {
+        throw new ErrorResponse(
+          errorMessages.UNAUTHORIZED_EDIT_OTHER_ADMIN,
+          FORBIDDEN,
+          errorCodes.UNAUTHORIZED_EDIT_OTHER_ADMIN,
+        );
+      }
+    }
+
     await UserRepository.update(id, updateUserDto);
     return pick(await UserRepository.findOneBy('id', id), ['id', 'full_name', 'email', 'role']);
   };
