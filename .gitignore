@@ -5,6 +5,3 @@
 src/public/css/
 .env
 package-lock.json
-
-auth.service.js
-jwt.service.js

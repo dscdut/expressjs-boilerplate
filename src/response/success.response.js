@@ -3,25 +3,25 @@
 import { statusCodes } from './httpResponse';
 
 class SuccessResponse {
-  constructor({ statusCode = statusCodes.OK, metadata = {} }) {
+  constructor({ statusCode = statusCodes.OK, data = {} }) {
     this.status = statusCode;
-    this.metadata = metadata;
+    this.data = data;
   }
 
   send(res, header = {}) {
-    return res.status(this.status).json(this.metadata);
+    return res.status(this.status).json(this.data);
   }
 }
 
 class OK extends SuccessResponse {
-  constructor({ metadata }) {
-    super({ metadata });
+  constructor({ data }) {
+    super({ data });
   }
 }
 
 class CREATED extends SuccessResponse {
-  constructor({ statusCode = statusCodes.CREATED, metadata }) {
-    super({ statusCode, metadata });
+  constructor({ statusCode = statusCodes.CREATED, data }) {
+    super({ statusCode, data });
   }
 }
 
