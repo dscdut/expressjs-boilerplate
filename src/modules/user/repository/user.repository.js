@@ -61,4 +61,28 @@ export class UserRepository {
     }
     return null;
   };
+
+  static getUsers = async (page, page_size) => {
+    const users = await db.User.findAndCountAll({
+      order: [
+        ['full_name', 'ASC'],
+        ['createdAt', 'DESC'],
+        ['updatedAt', 'DESC'],
+      ],
+      include: [
+        {
+          model: db.Role,
+          require: true,
+          as: 'role',
+          attributes: ['id', 'name'],
+        },
+      ],
+      attributes: ['id', 'full_name', 'email'],
+      offset: page_size * (page - 1),
+      limit: page_size,
+      raw: true,
+    });
+
+    return users;
+  };
 }

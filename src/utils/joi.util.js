@@ -31,7 +31,7 @@ export class JoiUtils {
     });
   };
 
-  static id = () => {
+  static positiveNumber = () => {
     return Joi.number().required().integer().positive().messages({
       'number.base': 'The provided id is in an invalid format. The ID must be a number greater than 0',
     });

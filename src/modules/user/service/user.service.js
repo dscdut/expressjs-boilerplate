@@ -4,6 +4,7 @@ import { statusCodes, errorCodes, errorMessages } from '@/response/httpResponse'
 import { UserRepository } from '../repository';
 import { ROLES } from '@/enum';
 import { RoleRepository } from '@/modules/role/repository';
+import { DEFAULT_PAGE, DEFAULT_PAGE_SIZE } from '@/enum';
 
 export class UserService {
   static getUserByEmail = async (email) => {
@@ -76,5 +77,16 @@ export class UserService {
     await UserRepository.update(id, updateUserDto);
 
     return pick(await UserRepository.findOneBy('id', id), ['id', 'full_name', 'email', 'role']);
+  };
+
+  static getUsers = async (paginateDto) => {
+    const page_size = paginateDto.page_size || DEFAULT_PAGE_SIZE;
+    const page = paginateDto.page || DEFAULT_PAGE;
+    const users = await UserRepository.getUsers(page, page_size);
+
+    return {
+      total: users.count,
+      data: users.rows,
+    };
   };
 }

@@ -1,4 +1,4 @@
-import { UpdateUserByAdminDto, UpdateUserByOwnerDto } from '@/modules/user/dto';
+import { PaginateDto, UpdateUserByAdminDto, UpdateUserByOwnerDto } from '@/modules/user/dto';
 import { UserService } from '@/modules/user/service';
 import { NoContent, SuccessResponse } from '@/response/success.response.js';
 
@@ -22,6 +22,12 @@ class userController {
     const userId = req.params?.id;
     await UserService.deleteUser(userId);
     new NoContent({}).send(res);
+  };
+
+  static getUsers = async (req, res) => {
+    new SuccessResponse({
+      data: await UserService.getUsers(PaginateDto(req.query)),
+    }).send(res);
   };
 }
 export default userController;
