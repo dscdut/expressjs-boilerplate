@@ -40,10 +40,11 @@ export class UserService {
     await UserRepository.delete(userId);
   };
 
-  static updateUser = async (id, updateUserDto) => {
+  static updateUser = async (id, updateUserDto, adminId = null) => {
     const user = await UserRepository.findOneBy('id', id);
+
     if (!user)
-      throw new ErrorResponse(errorMessages.INVALID_SYNTAX, errorCodes.NOT_FOUND, errorCodes.INVALID_SYNTAX, [
+      throw new ErrorResponse(errorMessages.RESOURCE_NOT_EXIST, statusCodes.NOT_FOUND, errorCodes.RESOURCE_NOT_EXIST, [
         errorMessages.INVALID_USER,
       ]);
 
@@ -54,13 +55,25 @@ export class UserService {
       }
     }
 
-    const updatedUser = await UserRepository.update(id, updateUserDto);
-    if (!updatedUser)
-      throw new ErrorResponse(
-        errorMessages.INTERNAL_SERVER_ERROR,
-        statusCodes.INTERNAL_SERVER_ERROR,
-        errorCodes.INTERNAL_SERVER_ERROR,
-      );
+    if (adminId) {
+      const isExistRole = await RoleRepository.checkExistRole(updateUserDto.role_id);
+
+      if (!isExistRole) {
+        throw new ErrorResponse(errorMessages.INVALID_SYNTAX, statusCodes.BAD_REQUEST, errorCodes.INVALID_SYNTAX, [
+          errorMessages.INVALID_ROLE,
+        ]);
+      }
+
+      if (user.role_id === ROLES.IS_ADMIN.id && id !== adminId) {
+        throw new ErrorResponse(
+          errorMessages.UNAUTHORIZED_EDIT_OTHER_ADMIN,
+          statusCodes.FORBIDDEN,
+          errorCodes.UNAUTHORIZED_EDIT_OTHER_ADMIN,
+        );
+      }
+    }
+
+    await UserRepository.update(id, updateUserDto);
 
     return pick(await UserRepository.findOneBy('id', id), ['id', 'full_name', 'email', 'role']);
   };
