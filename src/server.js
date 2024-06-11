@@ -4,10 +4,10 @@ import express from 'express';
 import router from '@/config/routes.config';
 import appConfig from '@/config/app.config';
 import cookieparser from 'cookie-parser';
-import cors from 'cors';
 import models from '@/database/models';
 import instancePostgresdb from '@/config/database.config';
 import helmet from 'helmet';
+import configCors from '@/config/cors.config';
 
 // sync database
 models.sequelize.sync();
@@ -20,8 +20,8 @@ const app = express();
 // set security HTTP headers
 app.use(helmet());
 
-// enable cors
-app.use(cors());
+// config cors
+configCors(app);
 
 // parse json request body
 app.use(express.json());

@@ -1,0 +1,102 @@
+version: '3.8'
+
+networks:
+    app-network:
+        driver: bridge
+
+services:
+    api:
+        container_name: backend-api
+        restart: on-failure
+        image: base
+        ports:
+            - '8080:8080'
+        env_file: 
+            - .env
+        environment:
+            - DB_HOST=postgres-db
+        volumes:
+            - type: bind
+              source: .
+              target: /home/app
+            - /home/app/node_modules
+        depends_on:
+            - base
+            - init_db
+        networks:
+            - app-network
+        command: sh -c 'npm install && npm start'
+
+    db:
+        container_name: postgres-db
+        image: postgres:16.3-alpine3.20
+        restart: always
+        environment:
+            - POSTGRES_USER=postgres
+            - POSTGRES_PASSWORD=postgres
+            - POSTGRES_DB=boilerplate
+        ports:
+            - '5432:5432'
+        networks:
+            - app-network
+
+    base:
+        build: .
+        image: base
+        # Uncomment the line below to run on mac os
+        # platform: linux/arm64/v8
+        env_file:
+            - .env
+        environment:
+            - DB_HOST=postgres-db
+        depends_on:
+            - db
+        networks:
+            - app-network
+
+    init_db:
+        image: base
+        # Uncomment the line below to run on mac os
+        # platform: linux/arm64/v8
+        env_file:
+            - .env
+        environment:
+            - DB_HOST=postgres-db
+            - POSTGRES_USER=postgres
+            - POSTGRES_PASSWORD=postgres
+            - POSTGRES_DB=boilerplate
+        depends_on:
+            - base
+            - db
+        volumes:
+            - .:/home/app
+            - ./scripts/wait-for-it.sh:/home/app/scripts/wait-for-it.sh
+        command:
+            [
+                './scripts/wait-for-it.sh',
+                'postgres-db:5432',
+                '--',
+                'sh',
+                '-c',
+                'npm run db:reset',
+            ]
+        networks:
+            - app-network
+
+    pgadmin:
+        container_name: mypgadmin
+        image: dpage/pgadmin4
+        restart: always
+        env_file:
+            - .env
+        environment: 
+            - PGADMIN_DEFAULT_EMAIL=admin@gmail.com,
+            - PGADMIN_DEFAULT_PASSWORD=123456 
+        ports:
+            - '5050:80'
+        networks:
+            - app-network
+        links:
+            - db:pg-server
+        logging:
+            driver: 'none'

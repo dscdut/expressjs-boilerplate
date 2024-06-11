@@ -14,7 +14,7 @@ const development = {
   db: {
     host: env('HOST', 'localhost'),
     port: env('PORT', 5432),
-    database: env('DB_NAME', 'postgres'),
+    database: env('DB_NAME', 'boilerplate'),
     username: env('DB_USER', 'postgres'),
     password: env('DB_PASS', 'postgres'),
     dialect: env('DB_DIALECT', 'postgres'),
@@ -33,7 +33,7 @@ const production = {
   db: {
     host: env('HOST', 'localhost'),
     port: env('PORT', 5432),
-    database: env('DB_NAME', 'postgres'),
+    database: env('DB_NAME', 'boilerplate'),
     username: env('DB_USER', 'postgres'),
     password: env('DB_PASS', 'postgres'),
     dialect: env('DB_DIALECT', 'postgres'),
