@@ -3,12 +3,12 @@ import { ROLES } from '@/enum';
 
 export class UserRepository {
   static isExist = async (column, value) => {
-    const exist = await db.User.count({
+    const exist = await db.User.findOne({
       where: {
         [column]: value,
       },
     });
-    return exist > 0;
+    return exist;
   };
 
   static findOneBy = async (column, value) => {

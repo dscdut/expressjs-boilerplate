@@ -2,8 +2,8 @@
 
 /** @type {import('sequelize-cli').Migration} */
 
-//123456
-const DEFAULT_PASSWORD = '$2a$10$ALnygnWxgJn4bAB9n.t6qeV56qv11O0O0PffkuimtW1/Rs8cNNYY6';
+//123456Aa@
+const DEFAULT_PASSWORD = '$2a$12$ewKpOMQpg7Ctj5bUb2mbBe2vvznInOUoZ2TyUcEvxYlXwrTg.UhaG';
 module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.bulkInsert(
