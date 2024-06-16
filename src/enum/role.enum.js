@@ -1,10 +1,10 @@
 export const ROLES = {
-  IS_ADMIN: {
+  ADMIN: {
     id: 1,
     name: 'admin',
   },
-  IS_MEMBER: {
+  MEMBER: {
     id: 2,
-    name: 'member',
+    name: 'member ',
   },
 };

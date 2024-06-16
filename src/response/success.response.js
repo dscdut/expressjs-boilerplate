@@ -1,9 +1,8 @@
 'use strict';
-
-import { statusCodes } from './httpResponse';
+import { OK, CREATED } from 'http-status';
 
 class SuccessResponse {
-  constructor({ statusCode = statusCodes.OK, data = {} }) {
+  constructor({ statusCode = OK, data = {} }) {
     this.status = statusCode;
     this.data = data;
   }
@@ -13,16 +12,16 @@ class SuccessResponse {
   }
 }
 
-class OK extends SuccessResponse {
+class OkResponse extends SuccessResponse {
   constructor({ data }) {
     super({ data });
   }
 }
 
-class CREATED extends SuccessResponse {
-  constructor({ statusCode = statusCodes.CREATED, data }) {
+class CreatedResponse extends SuccessResponse {
+  constructor({ statusCode = CREATED, data }) {
     super({ statusCode, data });
   }
 }
 
-export { OK, CREATED, SuccessResponse };
+export { OkResponse, CreatedResponse, SuccessResponse };

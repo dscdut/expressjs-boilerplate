@@ -1,10 +1,10 @@
 import { RegisterDto } from '@/modules/auth/dto';
 import { AuthService } from '@/modules/auth/service';
-import { CREATED } from '@/response/success.response.js';
+import { CreatedResponse } from '@/response/success.response.js';
 
 class authController {
   static register = async (req, res) => {
-    new CREATED({
+    new CreatedResponse({
       data: await AuthService.register(RegisterDto(req.body)),
     }).send(res);
   };

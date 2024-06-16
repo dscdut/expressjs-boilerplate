@@ -1,7 +1,8 @@
 import Joi from 'joi';
 import pick from '@/utils/pick';
 import { ErrorResponse } from '@/response/error.response';
-import { errorCodes, errorMessages, statusCodes } from '@/response/httpResponse';
+import { errorCodes, errorMessages } from '@/response/httpResponse';
+import { BAD_REQUEST } from 'http-status';
 
 const validate = (schema) => (req, res, next) => {
   const validSchema = pick(schema, ['params', 'query', 'body']);
@@ -12,9 +13,7 @@ const validate = (schema) => (req, res, next) => {
 
   if (error) {
     const details = error.details.map((detail) => detail.message);
-    return next(
-      new ErrorResponse(errorMessages.INVALID_SYNTAX, statusCodes.BAD_REQUEST, errorCodes.INVALID_SYNTAX, details),
-    );
+    return next(new ErrorResponse(errorMessages.INVALID_SYNTAX, BAD_REQUEST, errorCodes.INVALID_SYNTAX, details));
   }
   Object.assign(req, value);
   return next();
