@@ -20,7 +20,7 @@ const customizeConfig = {
 
 sequelize = new Sequelize(database, username, password, customizeConfig);
 
-class Database {
+export class Database {
   constructor() {
     this.connect();
   }
@@ -41,6 +41,3 @@ class Database {
     return Database.instance;
   }
 }
-
-const instancePostgresdb = Database.getInstance();
-export default instancePostgresdb;

@@ -6,7 +6,7 @@ import appConfig from '@/config/app.config';
 import cookieparser from 'cookie-parser';
 import cors from 'cors';
 import models from '@/database/models';
-import instancePostgresdb from '@/config/database.config';
+import { Database } from '@/config/database.config';
 import helmet from 'helmet';
 
 // sync database
@@ -29,6 +29,9 @@ app.use(express.json());
 // parse urlencoded request body
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieparser('MY SECRET'));
+
+//conect database
+Database.getInstance();
 
 app.use(router);
 
