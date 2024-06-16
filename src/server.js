@@ -30,7 +30,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieparser('MY SECRET'));
 
-//conect database
+//connect database
 Database.getInstance();
 
 app.use(router);

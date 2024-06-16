@@ -13,7 +13,7 @@ export class UserService {
   static createUser = async (userDto) => {
     const isExistEmail = await UserRepository.findOneBy('email', userDto.email);
     if (isExistEmail) {
-      throw new ErrorResponse(errorMessages.DUPILICATE_EMAIL, CONFLICT, errorCodes.DUPILICATE_EMAIL);
+      throw new ErrorResponse(errorMessages.DUPLICATE_EMAIL, CONFLICT, errorCodes.DUPLICATE_EMAIL);
     }
 
     const createdUser = await UserRepository.create(userDto);
