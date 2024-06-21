@@ -1,7 +1,5 @@
 'use strict';
 
-const { ROLES } = require('@/enum');
-
 /** @type {import('sequelize-cli').Migration} */
 
 //123456Aa@
@@ -15,7 +13,7 @@ module.exports = {
           full_name: 'admin',
           email: 'admin@gmail.com',
           password: DEFAULT_PASSWORD,
-          role_id: ROLES.ADMIN.id,
+          role_id: 1,
           createdAt: new Date(),
           updatedAt: new Date(),
         },
@@ -23,7 +21,7 @@ module.exports = {
           full_name: 'user 01',
           email: 'user01@gmail.com',
           password: DEFAULT_PASSWORD,
-          role_id: ROLES.MEMBER.id,
+          role_id: 2,
           createdAt: new Date(),
           updatedAt: new Date(),
         },
@@ -31,7 +29,7 @@ module.exports = {
           full_name: 'user 02',
           email: 'user02@gmail.com',
           password: DEFAULT_PASSWORD,
-          role_id: ROLES.MEMBER.id,
+          role_id: 2,
           createdAt: new Date(),
           updatedAt: new Date(),
         },

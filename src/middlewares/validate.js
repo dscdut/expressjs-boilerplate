@@ -4,7 +4,7 @@ import { ErrorResponse } from '@/response/error.response';
 import { errorCodes, errorMessages } from '@/response/httpResponse';
 import { BAD_REQUEST } from 'http-status';
 
-const validate = (schema) => (req, res, next) => {
+const validateRequest = (schema) => (req, res, next) => {
   const validSchema = pick(schema, ['params', 'query', 'body']);
   const object = pick(req, Object.keys(validSchema));
   const { value, error } = Joi.compile(validSchema)
@@ -19,4 +19,4 @@ const validate = (schema) => (req, res, next) => {
   return next();
 };
 
-export default validate;
+export default validateRequest;

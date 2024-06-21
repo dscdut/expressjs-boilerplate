@@ -7,4 +7,4 @@ const router = express.Router();
 router.use('/auth', authRoute);
 router.use('/docs', docRoute);
 
-module.exports = router;
+export default router;
