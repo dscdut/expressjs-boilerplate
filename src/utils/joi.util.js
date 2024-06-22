@@ -35,4 +35,10 @@ export class JoiUtils {
       'number.base': validationMessages.ID,
     });
   };
+
+  static id = () => {
+    return Joi.number().required().integer().positive().messages({
+      'number.base': 'The provided id is in an invalid format. The ID must be a number greater than 0',
+    });
+  };
 }

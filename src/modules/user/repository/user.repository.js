@@ -9,7 +9,7 @@ export class UserRepository {
         {
           model: db.Role,
           require: true,
-          as: 'roleData',
+          as: 'role',
           attributes: ['id', 'name'],
         },
       ],
@@ -32,8 +32,20 @@ export class UserRepository {
   };
 
   static delete = async (id) => {
-    await db.User.destroy({
+    return await db.User.destroy({
       where: { id: id },
     });
+  };
+
+  static update = async (id, userDto) => {
+    const result = await db.User.update(userDto, {
+      where: { id: id },
+      returning: true,
+    });
+
+    if (result[0] === 1) {
+      return result[1][0];
+    }
+    return null;
   };
 }
