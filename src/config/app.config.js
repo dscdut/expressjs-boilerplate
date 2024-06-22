@@ -8,15 +8,15 @@ const development = {
   },
   jwt: {
     secret: env('JWT_SECRET', 'gdscdut'),
-    accessExpirationMinutes: env('JWT_ACCESS_EXPIRATION_MINUTES', 30),
-    refreshExpirationDays: env('JWT_REFRESH_EXPIRATION_DAYS', 30),
+    accessExpiration: env('JWT_ACCESS_EXPIRATION', '1d'),
+    refreshExpiration: env('JWT_REFRESH_EXPIRATION', '30d'),
   },
   db: {
     host: env('HOST', 'localhost'),
     port: env('PORT', 5432),
     database: env('DB_NAME', 'postgres'),
-    username: env('DB_USER', 'localhost'),
-    password: env('DB_PASS', '123456'),
+    username: env('DB_USER', 'postgres'),
+    password: env('DB_PASS', 'postgres'),
     dialect: env('DB_DIALECT', 'postgres'),
   },
 };
@@ -27,15 +27,15 @@ const production = {
   },
   jwt: {
     secret: env('JWT_SECRET', 'gdscdut'),
-    accessExpirationMinutes: env('JWT_ACCESS_EXPIRATION_MINUTES', 30),
-    refreshExpirationDays: env('JWT_REFRESH_EXPIRATION_DAYS', 30),
+    accessExpiration: env('JWT_ACCESS_EXPIRATION', '1d'),
+    refreshExpiration: env('JWT_REFRESH_EXPIRATION', '30d'),
   },
   db: {
     host: env('HOST', 'localhost'),
     port: env('PORT', 5432),
     database: env('DB_NAME', 'postgres'),
-    username: env('DB_USER', 'localhost'),
-    password: env('DB_PASS', '123456'),
+    username: env('DB_USER', 'postgres'),
+    password: env('DB_PASS', 'postgres'),
     dialect: env('DB_DIALECT', 'postgres'),
   },
 };
