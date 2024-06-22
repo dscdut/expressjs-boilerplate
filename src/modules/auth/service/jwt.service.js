@@ -14,7 +14,7 @@ export class JwtService {
     let payload;
     jwt.verify(token, config.jwt.secret, (err, decoded) => {
       if (err) {
-        throw new ErrorResponse(errorMessages.INVALID_SYNTAX, UNAUTHORIZED, errorCodes.INVALID_SYNTAX);
+        throw new ErrorResponse(errorMessages.INVALID_TOKEN, UNAUTHORIZED, errorCodes.REQUIRED_TOKEN);
       }
       payload = decoded;
     });
