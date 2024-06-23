@@ -11,3 +11,12 @@ export const updateUserByOwner = {
     email: JoiUtils.email(),
   }),
 };
+
+export const updateUserByAdmin = {
+  params: Joi.object().keys({ id: JoiUtils.id() }),
+  body: Joi.object().keys({
+    full_name: JoiUtils.fullName(),
+    email: JoiUtils.email(),
+    role_id: JoiUtils.id(),
+  }),
+};
