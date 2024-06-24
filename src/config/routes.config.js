@@ -4,6 +4,7 @@ import routes from '@/routes';
 import appConfig from '@/config/app.config';
 import { errorMessages, errorCodes } from '@/response/httpResponse';
 import { INTERNAL_SERVER_ERROR, NOT_FOUND } from 'http-status';
+import { env } from '@/utils/function';
 
 const {
   app: { prefix },
@@ -32,6 +33,11 @@ router.use((error, req, res, next) => {
 
   if (error.details) {
     response.details = error.details;
+  }
+
+  const node = env('NODE_ENV', 'development');
+  if (node === 'development' && statusCode === INTERNAL_SERVER_ERROR) {
+    response.details = error.stack;
   }
   return res.status(statusCode).json(response);
 });
