@@ -6,6 +6,7 @@ import { CONFLICT, FORBIDDEN, NOT_FOUND } from 'http-status';
 import { ROLES } from '@/enum';
 import { Optional } from '@/utils/optional';
 import { RoleService } from '@/modules/role/service';
+import { PaginationResponseDto } from '@/core/pagination/dto/pagination.dto';
 
 export class UserService {
   static findUserByEmail = async (email) => {
@@ -70,7 +71,24 @@ export class UserService {
       }
     }
 
+    if (adminId) {
+      await RoleService.getRoleById(updateUserDto.role_id);
+
+      if (user.role_id === ROLES.ADMIN.id && id !== adminId) {
+        throw new ErrorResponse(
+          errorMessages.UNAUTHORIZED_EDIT_OTHER_ADMIN,
+          FORBIDDEN,
+          errorCodes.UNAUTHORIZED_EDIT_OTHER_ADMIN,
+        );
+      }
+    }
+
     await UserRepository.update(id, updateUserDto);
     return pick(await UserRepository.findOneBy('id', id), ['id', 'full_name', 'email', 'role']);
+  };
+
+  static getUsersPagination = async (paginationDto) => {
+    const { page, page_size, search, sort } = paginationDto;
+    return PaginationResponseDto(await UserRepository.getUsersPagination(page, page_size, search, sort));
   };
 }

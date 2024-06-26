@@ -2,6 +2,7 @@
 .vscode
 /node_modules
 /build
+/dist
 src/public/css/
 .env
 package-lock.json
