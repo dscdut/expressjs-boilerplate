@@ -145,3 +145,7 @@ DB_USER=postgres
 DB_PASS=postgres
 DB_DIALECT=postgres
 ```
+## Design API
+```sh
+https://gdsc-boilerplate-swagger-docs-api-latest.onrender.com/
+```
