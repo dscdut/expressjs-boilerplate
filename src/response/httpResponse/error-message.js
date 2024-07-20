@@ -2,7 +2,7 @@ export default {
   LOGIN_FAILED: 'Incorrect email or password',
   INTERNAL_SERVER_ERROR: 'The database connection has an issue',
   LOGIC_SYNTAX_ERROR: 'There are issues with the logic and syntax',
-  INSUFFICIENT_RESOURCES_ERROR: `The server doesn’t have sufficient resources to handle user requests`,
+  INSUFFICIENT_RESOURCES_ERROR: 'The server doesn’t have sufficient resources to handle user requests',
   NETWORK_CONNECTION_ERROR: 'Please check your network connection and try again later',
   INVALID_SYNTAX: 'Invalid syntax',
   DUPLICATE_EMAIL: 'Email already exists',
@@ -15,4 +15,7 @@ export default {
   ROUTE_NOT_FOUND: 'The path does not exist',
   REQUIRED_TOKEN: 'Users must log in to access this resource',
   INVALID_TOKEN: 'Token has expired or is not in the correct format',
+  PAYMENT_METHOD_INVALID: 'Payment method invalid',
+  ORDER_ID_NOT_EXIST: 'The order Id does not exits',
+  CURRENCY_NOT_EXIST: 'Unable to determine the currency'
 };

@@ -10,7 +10,7 @@ import { Database } from '@/config/database.config';
 import helmet from 'helmet';
 
 // sync database
-models.sequelize.sync();
+models.sequelize.sync({ alter: true });
 
 const {
   app: { port },

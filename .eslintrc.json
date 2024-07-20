@@ -3,22 +3,39 @@
         "es2021": true,
         "node": true
     },
-    "extends": ["airbnb-base", "prettier"],
+    "extends": [
+        "airbnb-base",
+        "prettier"
+    ],
     "globals": {
         "Atomics": "readonly",
         "SharedArrayBuffer": "readonly"
     },
-    "plugins": ["prettier"],
+    "plugins": [
+        "prettier"
+    ],
     "parser": "@babel/eslint-parser",
     "parserOptions": {
         "ecmaVersion": 2018,
         "sourceType": "module"
     },
     "rules": {
-        "quotes": ["error", "single"],
-        "semi": ["error", "always"],
+        "quotes": [
+            "error",
+            "single"
+        ],
+        "semi": [
+            "error",
+            "always"
+        ],
         "linebreak-style": 0,
-        "indent": ["error", 4, { "SwitchCase": 1 }],
+        "indent": [
+            "off",
+            4,
+            {
+                "SwitchCase": 1
+            }
+        ],
         "consistent-return": 0,
         "no-underscore-dangle": 0,
         "no-tabs": 0,
@@ -29,9 +46,20 @@
         "no-param-reassign": "off",
         "camelcase": "off",
         "import/no-unresolved": "off",
-        "arrow-parens": ["error", "as-needed"],
-        "comma-dangle": ["error", "only-multiline"],
-        "no-trailing-spaces": ["error", { "ignoreComments": true }],
+        "arrow-parens": [
+            "error",
+            "as-needed"
+        ],
+        "comma-dangle": [
+            "error",
+            "only-multiline"
+        ],
+        "no-trailing-spaces": [
+            "error",
+            {
+                "ignoreComments": true
+            }
+        ],
         "eslint-plugin-import/no-commonjs": "off",
         "eslint-plugin-import/no-amd": "off",
         "import/extensions": "off",
@@ -49,6 +77,8 @@
                 "ignoreStrings": true,
                 "ignoreTemplateLiterals": true
             }
-        ]
+        ],
+        "strict": "off",
+        "no-prototype-builtins": "off"
     }
 }
