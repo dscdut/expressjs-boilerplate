@@ -69,7 +69,7 @@ $ docker compose up init_db
 $ npm run db:reset
 
 # Create new migration file
-$ npx migrate:make <migration_name_file.js>
+$ npx sequelize-cli migration:generate --name <migration_name_file.js>
 
 # Run the migration
 $ npx sequelize-cli db:migrate
@@ -88,7 +88,7 @@ $ npx sequelize-cli seed:generate --name <migration_name_file.js>
 $ npx sequelize-cli db:seed:all
 
 # Run specific seed file
-$ npx sequelize-cli db:seed -- --seed <seed_file_name.js>
+$ npx sequelize-cli db:seed --seed <seed_file_name.js>
 ```
 
 For more information you can read at Sequelize docs

@@ -1,5 +1,5 @@
 'use strict';
-import { env } from '@/utils/function.js';
+import { env } from '@/utils/function';
 
 const development = {
   app: {
@@ -19,6 +19,13 @@ const development = {
     password: env('DB_PASS', 'postgres'),
     dialect: env('DB_DIALECT', 'postgres'),
   },
+  payment: {
+    vnp_TmnCode: env('vnp_TmnCode'),
+    vnp_HashSecret: env('vnp_HashSecret'),
+    vnp_Url: env('vnp_Url'),
+    vnp_Api: env('vnp_Api'),
+    vnp_ReturnUrl: env('vnp_ReturnUrl'),
+  },
 };
 const production = {
   app: {
@@ -37,6 +44,13 @@ const production = {
     username: env('DB_USER', 'postgres'),
     password: env('DB_PASS', 'postgres'),
     dialect: env('DB_DIALECT', 'postgres'),
+  },
+  payment: {
+    vnp_TmnCode: env('vnp_TmnCode'),
+    vnp_HashSecret: env('vnp_HashSecret'),
+    vnp_Url: env('vnp_Url'),
+    vnp_Api: env('vnp_Api'),
+    vnp_ReturnUrl: env('vnp_ReturnUrl'),
   },
 };
 

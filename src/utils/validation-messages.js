@@ -5,6 +5,7 @@ const validationMessages = {
   CONFIRM_PASSWORD: 'Confirm password must match the password',
   ID: 'The provided id is in an invalid format. The ID must be a number greater than 0',
   SORT: `Sort must be a comma-separated list of field:order pairs, where order is either 'ASC' or 'DESC'`,
+  PHONE_NUMBER: 'Phone number must be a valid number with 10 to 15 digits, optionally starting with +',
 };
 
 export default validationMessages;

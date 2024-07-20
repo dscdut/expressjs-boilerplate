@@ -1,2 +1,2 @@
-export { default as errorCodes } from './errorCode';
-export { default as errorMessages } from './errorMessage';
+export { default as errorCodes } from './error-code';
+export { default as errorMessages } from './error-message';

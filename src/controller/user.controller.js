@@ -3,7 +3,7 @@ import { UpdateUserByAdminDto, UpdateUserByOwnerDto } from '@/modules/user/dto';
 import { UserService } from '@/modules/user/service';
 import { NoContent, SuccessResponse } from '@/response/success.response.js';
 
-class userController {
+class UserController {
   static updateUserByOwner = async (req, res) => {
     const userId = req.user.id;
     new SuccessResponse({
@@ -40,4 +40,4 @@ class userController {
     }).send(res);
   };
 }
-export default userController;
+export default UserController;

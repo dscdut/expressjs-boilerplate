@@ -2,7 +2,7 @@ import { RegisterDto, LoginDto } from '@/modules/auth/dto';
 import { AuthService } from '@/modules/auth/service';
 import { CreatedResponse, SuccessResponse } from '@/response/success.response.js';
 
-class authController {
+class AuthController {
   static register = async (req, res) => {
     new CreatedResponse({
       data: await AuthService.register(RegisterDto(req.body)),
@@ -15,4 +15,4 @@ class authController {
     }).send(res);
   };
 }
-export default authController;
+export default AuthController;

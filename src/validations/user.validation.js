@@ -2,7 +2,7 @@ import Joi from 'joi';
 import { JoiUtils } from '@/utils/joi.util';
 
 export const id = {
-  params: Joi.object().keys({ id: JoiUtils.id() }),
+  params: Joi.object().keys({ id: JoiUtils.integerId() }),
 };
 
 export const updateUserByOwner = {
@@ -13,11 +13,11 @@ export const updateUserByOwner = {
 };
 
 export const updateUserByAdmin = {
-  params: Joi.object().keys({ id: JoiUtils.id() }),
+  params: Joi.object().keys({ id: JoiUtils.integerId() }),
   body: Joi.object().keys({
     full_name: JoiUtils.fullName(),
     email: JoiUtils.email(),
-    role_id: JoiUtils.id(),
+    role_id: JoiUtils.integerId(),
   }),
 };
 

@@ -39,13 +39,13 @@ export class UserRepository {
   };
 
   static update = async (id, userDto) => {
-    const result = await db.User.update(userDto, {
+    const [numberOfAffectedRows, affectedRows] = await db.User.update(userDto, {
       where: { id: id },
       returning: true,
     });
 
-    if (result[0] === 1) {
-      return result[1][0];
+    if (numberOfAffectedRows === 1) {
+      return affectedRows[0];
     }
     return null;
   };
